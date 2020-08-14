@@ -36,8 +36,8 @@ int createAcc() // we have finally finished it. now...
 	scanf_s("%s", &country, 500);
 	scanf_s("%s", &country1, 500);
 	printf("Enter your adress: ");
-	scanf_s("%s", &adress1, 500); // go to hell
-	scanf_s("%s", &adress2, 500); // go to hell
+	scanf_s("%s", &adress1, 500); 
+	scanf_s("%s", &adress2, 500); 
 	printf("Enter your date of birth: \n");
 	printf("Day: ");
 	scanf_s("%d", &day);	
