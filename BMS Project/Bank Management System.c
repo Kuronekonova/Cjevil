@@ -2,26 +2,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-FILE* bankAccount;
-FILE* pins;
+FILE * bankAccount; // the bank account file where below data is stored
+FILE * pins; // might be useful in the future
 char name[500]; // First Name
-char pin[500];
-char secondName[500]; // Second Name
-char lastName[500]; // Last Name
-char country[500]; // Country Name 1
-char country1[500]; // Country Name 2
+char pin[500]; // Account Pin
+char country[500]; // Country Name 
 char day[500]; // Date of Birth
 char mon[500]; // Date of Birth
 char year[500]; // Date of Birth
 char csn[500]; // Citizenship Number
-char adress1[500]; // Adress 1
-char adress2[500]; // Adress 2
-char adress3; // Adress 3
+char adress1[500]; // Adress, not gonna change it to just adress cuz i'm too lazy.
 char phone[500]; // Phone Number
-char type[500]; // Account Type
 int action; // First action in main()
 int after; // Second action in main()
-int action2; // Action in createAcc()
+int action2; // Action in createAcc() - See switch statement.
 
 
 
@@ -47,7 +41,7 @@ int createAcc() // we have finally finished it. now...
 	fgets(year, 500, stdin); // this
 	printf("Enter your citizenship number: ");
 	fgets(csn, 500, stdin); // this
-	printf("Enter your phone number: ");
+	printf("Enter your phone number - Do not input spaces.\n");
 	fgets(phone, 500, stdin); // this
 	long long realPin = atoll(pin);
 	long long realDay = atoll(day);
@@ -77,8 +71,9 @@ int createAcc() // we have finally finished it. now...
 		strtok(name, "\n");
 		printf("These are your account details.\n"
 			   "Full Name: %s\n"
+			   "Country: %s"
 			   "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n"
-			   "Citizenship Number: %lld\n", name, realDay, realMon, realYear, realCsn);
+			   "Citizenship Number: %lld\n", name, country, realDay, realMon, realYear, realCsn);
 		printf("Adress: %s", adress1);
 		printf("Phone Number: %lld\n", realPhone);
 		printf("Account Type: Savings\n");
@@ -92,8 +87,9 @@ int createAcc() // we have finally finished it. now...
 		strtok(name, "\n");
 		printf("These are your account details.\n"
 			   "Full Name: %s\n"
+			   "Country: %s"
 			   "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n"
-			   "Citizenship Number: %lld\n", name, realDay, realMon, realYear, realCsn);
+			   "Citizenship Number: %lld\n", name, country, realDay, realMon, realYear, realCsn);
 		printf("Adress: %s", adress1);
 		printf("Phone Number: %lld\n", realPhone);
 		printf("Account Type: Money Market\n");
@@ -107,8 +103,9 @@ int createAcc() // we have finally finished it. now...
 		strtok(name, "\n");
 		printf("These are your account details.\n"
 			   "Full Name: %s\n"
+			   "Country: %s"
 			   "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n"
-			   "Citizenship Number: %lld\n", name, realDay, realMon, realYear, realCsn);
+			   "Citizenship Number: %lld\n", name, country, realDay, realMon, realYear, realCsn);
 		printf("Adress: %s", adress1);
 		printf("Phone Number: %lld\n", realPhone);
 		printf("Account Type: Ceritificate of Deposit\n");
@@ -122,8 +119,9 @@ int createAcc() // we have finally finished it. now...
 		strtok(name, "\n");
 		printf("These are your account details.\n"
 			   "Full Name: %s\n"
+        	   "Country: %s"
 			   "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n"
-			   "Citizenship Number: %lld\n", name, realDay, realMon, realYear, realCsn);
+			   "Citizenship Number: %lld\n", name, country, realDay, realMon, realYear, realCsn);
 		printf("Adress: %s", adress1);
 		printf("Phone Number: %lld\n", realPhone);
 		printf("Account Type: Brokerage\n");
@@ -137,22 +135,26 @@ int createAcc() // we have finally finished it. now...
 		strtok(name, "\n");
 		printf("These are your account details.\n"
 			   "Full Name: %s\n"
+			   "Country: %s"
 			   "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n"
-			   "Citizenship Number: %lld\n", name, realDay, realMon, realYear, realCsn);
+			   "Citizenship Number: %lld\n", name, country, realDay, realMon, realYear, realCsn);
 		printf("Adress: %s", adress1);
 		printf("Phone Number: %lld\n", realPhone);
 		printf("Account Type: Individual Retirement\n");
 		printf("Your data has been registred to a text file. \n");
 		break;
 	default: 
-		printf("Failed.\n");
+		printf("Failed. Invalid input or unknown error.\n");
+		printf("Terminating...\n");
 	}
 
+	// the part before this was a complete nightmare.
 
 	if (action2 == 1)
 	{
 		bankAccount = fopen("bankaccountdetails.txt", "a");
 		fprintf(bankAccount, "Full Name: %s\n", name);
+		fprintf(bankAccount, "Country: %s", country);
 		fprintf(bankAccount, "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n", realDay, realMon, realYear);
 		fprintf(bankAccount, "Citizenship Number: %lld\n", realCsn);
 		fprintf(bankAccount, "Adress: %s", adress1);
@@ -166,6 +168,7 @@ int createAcc() // we have finally finished it. now...
 	{
 		bankAccount = fopen("bankaccountdetails.txt", "a");
 		fprintf(bankAccount, "Full Name: %s\n", name);
+		fprintf(bankAccount, "Country: %s", country);
 		fprintf(bankAccount, "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n", realDay, realMon, realYear);
 		fprintf(bankAccount, "Citizenship Number: %lld\n", realCsn);
 		fprintf(bankAccount, "Adress: %s", adress1);
@@ -180,6 +183,7 @@ int createAcc() // we have finally finished it. now...
 	{
 		bankAccount = fopen("bankaccountdetails.txt", "a");
 		fprintf(bankAccount, "Full Name: %s\n", name);
+		fprintf(bankAccount, "Country: %s", country);
 		fprintf(bankAccount, "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n", realDay, realMon, realYear);
 		fprintf(bankAccount, "Citizenship Number: %lld\n", realCsn);
 		fprintf(bankAccount, "Adress: %s", adress1);
@@ -193,6 +197,7 @@ int createAcc() // we have finally finished it. now...
 	{
 		bankAccount = fopen("bankaccountdetails.txt", "a");
 		fprintf(bankAccount, "Full Name: %s\n", name);
+		fprintf(bankAccount, "Country: %s", country);
 		fprintf(bankAccount, "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n", realDay, realMon, realYear);
 		fprintf(bankAccount, "Citizenship Number: %lld\n", realCsn);
 		fprintf(bankAccount, "Adress: %s", adress1);
@@ -206,6 +211,7 @@ int createAcc() // we have finally finished it. now...
 	{
 		bankAccount = fopen("bankaccountdetails.txt", "a");
 		fprintf(bankAccount, "Full Name: %s\n", name);
+		fprintf(bankAccount, "Country: %s", country);
 		fprintf(bankAccount, "Date of birth: %lld/%lld/%lld (DD/MM/YYYY)\n", realDay, realMon, realYear);
 		fprintf(bankAccount, "Citizenship Number: %lld\n", realCsn);
 		fprintf(bankAccount, "Adress: %s", adress1);
@@ -223,7 +229,26 @@ int createAcc() // we have finally finished it. now...
 }
 
 
-/*
+
+int logIn() 
+{
+	/*
+		so this login function.. eh.. so this is how it works.
+		read text from the text files that has the account details
+		only take the Full Name and Pin
+		compare them to an input
+		and if the input matches one pin and one full name
+		it logs the user in.
+		and if it is logged in, it will allow the user to do other stuff.
+    */
+
+}
+
+
+int update() // this is probably going to be my biggest nightmare...
+{
+ 
+	/*
 		2. Update information of existing account
 
 		This will allow the user to change the data of an existing account.
@@ -232,44 +257,22 @@ int createAcc() // we have finally finished it. now...
 		C - And finally, print all the information of the account after updating it.
 */
 
-
-/*
-        so this login function.. eh.. so this is how it works.
-		read text from the text files that has the account details
-		only take the Full Name and Pin
-		compare them to an input
-		and if the input matches one pin and one full name
-		it logs the user in.
-		and if it is logged in, it will allow the user to do other stuff.
-*/
-
-int logIn() 
-{
-
-
-}
-
-
-int update() // this is probably going to be my biggest nightmare...
-{
- 
-
-
 }
 
 int transc()
 {
+	// lol
 
 }
 
 int removeAcc()
 {
-
+	// just remove text from file
 }
 
 int viewAcc() // nightmare...
 {
-
+	// ez. log in and view your account details.
 }
 
 
